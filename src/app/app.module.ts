@@ -10,6 +10,20 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+// import * as firebase from "firebase";
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../pages/login/login';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAYBfEuw_onYke-woAchRQgW7jztE4FGzQ",
+  authDomain: "appgerenciamentoocorrencias.firebaseapp.com",
+  databaseURL: "https://appgerenciamentoocorrencias.firebaseio.com",
+  projectId: "appgerenciamentoocorrencias",
+  storageBucket: "appgerenciamentoocorrencias.appspot.com",
+  messagingSenderId: "781212574413"
+};
 
 @NgModule({
   declarations: [
@@ -17,11 +31,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig,'appgerenciamentoocorrencias'),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +46,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AngularFireAuth
   ]
 })
 export class AppModule {}
