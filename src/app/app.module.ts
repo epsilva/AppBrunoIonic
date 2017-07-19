@@ -10,11 +10,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-// import * as firebase from "firebase";
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { LoginPage } from '../pages/login/login';
+import firebase from 'firebase';
+import { LoginProvider } from '../providers/login/login';
+import { RegistrarPage } from '../pages/registrar/registrar';
+import { LoginPage } from "../pages/login/login";
+import { HttpModule } from '@angular/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYBfEuw_onYke-woAchRQgW7jztE4FGzQ",
@@ -32,13 +32,13 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegistrarPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig,'appgerenciamentoocorrencias'),
-    AngularFireDatabaseModule
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,13 +47,20 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegistrarPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    LoginProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(){
+    firebase.initializeApp(firebaseConfig);
+  }
+
+}

@@ -1,33 +1,22 @@
-<!--
-  Generated template for the LoginPage page.
+<ion-content class="imagem-back-login" padding>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-</ion-header>
-
-
-<ion-content class="scroll-content-background-color" padding>
-
-<div class="div">
-  <img src="assets/img/latam-logo.png"/>
-</div>
+ <div class="pad-img-logo">
+  <img src="assets/img/logoLATAM.png"/>
+</div> 
 
 <ion-list>
 
   <ion-item>
-    <ion-input type="text" placeholder="Username"></ion-input>
+    <ion-input type="text" placeholder="E-mail" [(ngModel)]="credential.email"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-input type="password" placeholder="Password"></ion-input>
+  <ion-item class="margem-entre-imput">
+    <ion-input type="password" placeholder="Senha" [(ngModel)]="credential.senha"></ion-input>
   </ion-item>
 
 </ion-list>
 
-<button ion-button class="button.disable-hover.button.button-md.button-default.button-default-md">Default</button>
-<p>Fazer Cadastro!</p>
+<button ion-button round type="input" (click)="logarComGoogle()" class="botao-grande">Entrar</button>
+<button ion-button round outline type="input" (click)="registrar()" class="botao-grande color-bota-registre">Registre-se</button>
 
-</ion-content>
+</ion-content> 

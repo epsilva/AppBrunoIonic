@@ -1,0 +1,33 @@
+
+<ion-header>
+  <ion-navbar> 
+    <ion-title>
+      Registrar
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="imagem-back-login" padding>
+ <div class="pad-img-logo">
+  <img src="assets/img/logoLATAM.png"/>
+</div> 
+
+<ion-list>
+
+ <ion-item>
+    <ion-input type="text" placeholder="Nome" [(ngModel)]="credential.nome"></ion-input>
+ </ion-item>
+
+  <ion-item class="margem-entre-imput">
+    <ion-input type="text" placeholder="E-mail" [(ngModel)]="credential.email"></ion-input>
+  </ion-item>
+
+  <ion-item class="margem-entre-imput">
+    <ion-input type="password" placeholder="Senha" [(ngModel)]="credential.senha"></ion-input>
+  </ion-item>
+
+</ion-list>
+
+<button ion-button round type="input" (click)="registrar()" class="botao-grande">Registrar</button>
+
+</ion-content> 

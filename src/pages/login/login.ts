@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { RegistrarPage } from '../registrar/registrar';
+import { LoginProvider } from '../../providers/login/login';
+import { Credential } from '../../models/credential';
 
 @Component({
   selector: 'page-login',
@@ -14,11 +10,35 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  credential:Credential;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider) {
+    this.credential = new Credential();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    this.loginProvider.loginSucessoEventEmitter.subscribe(
+        user => console.log(user)
+    );
+    this.loginProvider.loginFalhaEventEmitter.subscribe(
+        error => console.log(error)
+    );
+  }
+
+  logarComEmail(){
+    this.loginProvider.loginWithCredential(this.credential);
+  }
+
+  logarComGoogle(){
+    this.loginProvider.loginWithGoogle();
+  }
+
+  registrar(){
+    this.navCtrl.push(RegistrarPage);
+  }
+
+  sair(){
+    this.loginProvider
   }
 
 }
