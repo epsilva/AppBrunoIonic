@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { RegistrarPage } from '../registrar/registrar';
 import { LoginProvider } from '../../providers/login/login';
 import { Credential } from '../../models/credential';
+import { DocumentoListaPage } from '../documento-lista/documento-lista';
 
 @Component({
   selector: 'page-login',
@@ -12,13 +13,22 @@ export class LoginPage {
 
   credential:Credential;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public menuCtrl: MenuController) {
     this.credential = new Credential();
+  }
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false);
+    this.menuCtrl.swipeEnable(false);
   }
 
   ionViewDidLoad() {
     this.loginProvider.loginSucessoEventEmitter.subscribe(
-        user => console.log(user)
+      user => {
+        this.menuCtrl.enable(true);
+        this.menuCtrl.swipeEnable(true);
+        this.navCtrl.setRoot(DocumentoListaPage)
+      }
     );
     this.loginProvider.loginFalhaEventEmitter.subscribe(
         error => console.log(error)
@@ -33,12 +43,17 @@ export class LoginPage {
     this.loginProvider.loginWithGoogle();
   }
 
+  logarFacebook(){
+    this.loginProvider.loginWithFacebook();
+  }
+
   registrar(){
-    this.navCtrl.push(RegistrarPage);
+    this.sair();
+    // this.navCtrl.push(RegistrarPage);
   }
 
   sair(){
-    this.loginProvider
+    this.loginProvider.exit();
   }
 
 }

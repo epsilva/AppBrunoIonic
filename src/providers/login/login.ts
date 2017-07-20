@@ -55,6 +55,17 @@ export class LoginProvider {
       );
   }
 
+  loginWithFacebook(){
+    let provider = new firebase.auth.FacebookAuthProvider;
+    firebase.auth().signInWithPopup(provider)
+      .then(
+        result => this.callBackSucessLogin(result)
+      )
+      .catch(
+        error => this.callBackFailLogin(error)
+      );
+  }
+
   exit(){
     firebase.auth().signOut().then(
       () => this.logoutEventEmiiter.emit(true)
@@ -66,7 +77,12 @@ export class LoginProvider {
 
   registrar(credential:Credential){
     firebase.auth().createUserWithEmailAndPassword(credential.email, credential.senha)
-    .then(result => console.log(result))
+    .then(
+      result => {
+        console.log(result);
+        firebase.database().ref('usuario/').child(result.uid).set(credential)
+      }
+    )
     .catch(error => console.log(error));
   }
 
