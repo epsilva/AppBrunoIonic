@@ -7,8 +7,7 @@
 
 <ion-content padding>
 
-  <!-- <form [formGroup]="documentoForm"> -->
-    <form>
+  <form [formGroup]="documentoForm">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -16,32 +15,22 @@
             <ion-label floating>
               Titulo
             </ion-label>
-            <ion-input name="titulo" [(ngModel)]="documento.titulo"></ion-input>
+            <ion-input name="titulo" formControlName="titulo" [(ngModel)]="documento.titulo"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-      <!-- <ion-row *ngIf="!documentoForm.controls.titulo.valid">
-        <ion-col>
-          <span *ngIf="documentoForm.controls.titulo.errors.required">
-            O titulo da tarefa é obrigatorio.
-          </span>
-          <span *ngIf="documentoForm.controls.titulo.errors.minlength">
-            O titulo da tarefa deve conter no minimo 5 caracteres
-          </span>
-        </ion-col>
-      </ion-row> -->
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label floating>
               Link
             </ion-label>
-            <ion-input name="link" [(ngModel)]="documento.link"></ion-input>
+            <ion-input name="link" formControlName="link" [(ngModel)]="documento.link"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
 
-       <ion-row>
+      <!--ion-row>
         <ion-col>
           <ion-item>
             <ion-label floating>
@@ -54,11 +43,11 @@
             </ion-select>
           </ion-item>
         </ion-col>
-      </ion-row> 
+      </ion-row-->
       <ion-row>
         <ion-col>
-          <button ion-button full clear (click)="salvarDocumento()">
-            Salvar tarefa
+          <button ion-button full (click)="salvarDocumento()" [disabled]="documentoForm.invalid">
+            Salvar Documento
           </button>
         </ion-col>
       </ion-row>

@@ -1,31 +1,39 @@
-<ion-header>
-
-  <ion-navbar color='primary'>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Documentos</ion-title>
+ <ion-header>
+  <ion-navbar>
+    <ion-title>
+      Documento
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="adicionarDocumento()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
-</ion-header>
+</ion-header> 
 
 <ion-content>
   <ion-list [virtualScroll]="documentos">
     <ion-item-sliding *virtualItem="let documento">
-      <button ion-item (click)="atualizarDocumento(documento)">
+      <ion-item (click)="abrirLink(documento)">
+        <ion-avatar item-start>
+          <img src="assets/img/web.jpg">
+        </ion-avatar>
         <documento-lista-item [documento]="documento"></documento-lista-item>
-      </button>
-
-      <ion-item-options>
-        <button ion-button clear icon-only (click)="deletarDocumento(documento)">
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button red icon-only color="danger" (click)="deletarDocumento(documento)">
           <ion-icon name="trash"></ion-icon>
         </button>
+        <button ion-button icon-only (click)="atualizarDocumento(documento)">
+          <ion-icon name="create"></ion-icon>
+      </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>
-<ion-fab bottom right>
+
+<!--ion-fab bottom right>
     <button ion-fab color='primary' (click)="adicionarDocumento()">
         <ion-icon name='add'></ion-icon>
     </button>
-</ion-fab>
+</ion-fab-->

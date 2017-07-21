@@ -10,11 +10,11 @@ import { DocumentoFormPage } from '../documento-form/documento-form';
 })
 export class DocumentoListaPage {
 
-  documentos:Array<Documento>;
+  documentos: Array<Documento>;
 
   constructor(public documentoProvider: DocumentoProvider,
-     public ngZone: NgZone,  public toastCtrl: ToastController, public navCtrl: NavController) {
-       this.documentos = new Array<Documento>();
+    public ngZone: NgZone, public toastCtrl: ToastController, public navCtrl: NavController) {
+    this.documentos = new Array<Documento>();
   }
 
   /*
@@ -24,41 +24,45 @@ export class DocumentoListaPage {
      * child_removed - Ouvinte para quando algum filho for deletado
      * child_moved - Ouvinte para ouvir as mudanças na prioridade de um filho
      */
-  ionViewDidLoad(){
+  ionViewDidLoad() {
 
     this.documentoProvider.reference.on('child_removed', (snapshot) => {
       let documentoRemovida = snapshot.val();
       this.toastCtrl.create({
-        message: 'Documento '+documentoRemovida.titulo+' removido!',
+        message: 'Documento ' + documentoRemovida.titulo + ' removido!',
         duration: 3000
       }).present();
     });
 
     this.documentoProvider.reference.on('value', (snapshot) => {
-        this.ngZone.run(() => {
-            let innerArray= new Array();
-            snapshot.forEach(element => {
-              let el = element.val();
-              innerArray.push(el);
-            });
-            this.documentos = innerArray;
+      this.ngZone.run(() => {
+        let innerArray = new Array();
+        snapshot.forEach(element => {
+          let el = element.val();
+          innerArray.push(el);
         });
+        this.documentos = innerArray;
+      });
     });
-    
+
   }
 
-  atualizarDocumento(documento:Documento){
-    this.navCtrl.push(DocumentoFormPage,{'documento' : documento});
+  atualizarDocumento(documento: Documento) {
+    this.navCtrl.push(DocumentoFormPage, { 'documento': documento });
   }
 
-  adicionarDocumento(){
-    this.navCtrl.push(DocumentoFormPage,{'documento' : new Documento()});
+  abrirLink(documento: Documento) {
+    window.open(documento.link, "_blank");
   }
 
-  deletarDocumento(documento:Documento){
+  adicionarDocumento() {
+    this.navCtrl.push(DocumentoFormPage, { 'documento': new Documento() });
+  }
+
+  deletarDocumento(documento: Documento) {
     this.documentoProvider.deletar(documento).then(
       sucesso => console.log('documento deletado')
     )
-    .catch(error => console.log('nao foi possivel deletar o documento'));
+      .catch(error => console.log('nao foi possivel deletar o documento'));
   }
 }

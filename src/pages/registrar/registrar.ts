@@ -16,13 +16,13 @@ import { Credential } from '../../models/credential'
 })
 export class RegistrarPage {
 
-  credential:Credential;
+  credential: Credential;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider:LoginProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider) {
     this.credential = new Credential();
   }
 
-  registrar(){
+  registrar() {
     this.loginProvider.registrar(this.credential);
   }
 

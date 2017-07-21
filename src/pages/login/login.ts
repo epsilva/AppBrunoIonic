@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrarPage } from '../registrar/registrar';
 import { LoginProvider } from '../../providers/login/login';
 import { Credential } from '../../models/credential';
-import { DocumentoListaPage } from '../documento-lista/documento-lista';
+import { TabsPage } from '../tabs/tabs';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-login',
@@ -11,48 +13,55 @@ import { DocumentoListaPage } from '../documento-lista/documento-lista';
 })
 export class LoginPage {
 
-  credential:Credential;
+  credential: Credential;
+  loginForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public menuCtrl: MenuController, public formBuilder: FormBuilder) {
     this.credential = new Credential();
-  }
 
-  ionViewDidEnter(){
+    this.loginForm = this.formBuilder.group({
+      'email': ['', Validators.required],
+      'senha': ['', Validators.required]
+    });
+
+    
+
+  }
+  
+
+  ionViewDidEnter() {
     this.menuCtrl.enable(false);
     this.menuCtrl.swipeEnable(false);
   }
 
   ionViewDidLoad() {
-    this.loginProvider.loginSucessoEventEmitter.subscribe(
-      user => {
-        this.menuCtrl.enable(true);
-        this.menuCtrl.swipeEnable(true);
-        this.navCtrl.setRoot(DocumentoListaPage)
+
+  const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (!(!user)) {
+        this.navCtrl.setRoot(TabsPage);
+        // this.loginProvider.registrarUserInfo(user);
       }
-    );
-    this.loginProvider.loginFalhaEventEmitter.subscribe(
-        error => console.log(error)
-    );
+    });
   }
 
-  logarComEmail(){
+  logarComEmail() {
     this.loginProvider.loginWithCredential(this.credential);
   }
 
-  logarComGoogle(){
+  logarComGoogle() {
     this.loginProvider.loginWithGoogle();
   }
 
-  logarFacebook(){
+  logarFacebook() {
     this.loginProvider.loginWithFacebook();
   }
 
-  registrar(){
-    this.sair();
-    // this.navCtrl.push(RegistrarPage);
+  registrar() {
+    //this.sair();
+    this.navCtrl.push(RegistrarPage);
   }
 
-  sair(){
+  sair() {
     this.loginProvider.exit();
   }
 

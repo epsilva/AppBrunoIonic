@@ -1,22 +1,24 @@
 <ion-content class="imagem-back-login" padding>
 
- <div class="pad-img-logo">
-  <img src="assets/img/logoLATAM.png"/>
-</div> 
+  <div class="pad-img-logo">
+    <img src="assets/img/logoLatam.png" />
+  </div>
 
-<ion-list>
+  <form [formGroup]="loginForm">
+    <ion-list>
 
-  <ion-item>
-    <ion-input type="text" placeholder="E-mail" [(ngModel)]="credential.email"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-input type="text" formControlName="email" placeholder="E-mail" [(ngModel)]="credential.email" name="email"></ion-input>
+      </ion-item>
 
-  <ion-item class="margem-entre-imput">
-    <ion-input type="password" placeholder="Senha" [(ngModel)]="credential.senha"></ion-input>
-  </ion-item>
+      <ion-item class="margem-entre-imput">
+        <ion-input type="password" formControlName="senha" placeholder="Senha" [(ngModel)]="credential.senha" name="senha"></ion-input>
+      </ion-item>
 
-</ion-list>
+    </ion-list>
 
-<button ion-button round type="input" (click)="logarComEmail()" class="botao-grande">Entrar</button>
-<button ion-button round outline type="input" (click)="registrar()" class="botao-grande color-bota-registre">Registre-se</button>
-
-</ion-content> 
+    <button ion-button round type="input" (click)="logarComEmail()" [disabled]="loginForm.invalid" class="botao-grande">Entrar</button>
+    <button ion-button round type="input" (click)="logarComGoogle()" class="botao-grande">Logar Com Google</button>
+     <button ion-button round outline type="input " (click)="registrar() " class="botao-grande color-bota-registre ">Registre-se</button> 
+  </form>
+</ion-content>

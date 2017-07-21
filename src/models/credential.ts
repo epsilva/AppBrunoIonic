@@ -1,5 +1,5 @@
-export class Credential{
-    email:string;
-    senha:string;
-    nome:string;
+import { Usuario } from "./usuario";
+
+export class Credential extends Usuario {
+    senha: string;
 }

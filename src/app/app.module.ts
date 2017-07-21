@@ -2,7 +2,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,6 +16,7 @@ import { DocumentoListaItemComponent } from '../components/documento-lista-item/
 import { DocumentoListaPage } from '../pages/documento-lista/documento-lista';
 import { DocumentoFormPage } from '../pages/documento-form/documento-form';
 import { ListaDocumentoProvider } from '../providers/lista-documento/lista-documento';
+import { ConfiguracoesPage } from "../pages/configuracoes/configuracoes";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYBfEuw_onYke-woAchRQgW7jztE4FGzQ",
@@ -30,13 +30,13 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage,
     RegistrarPage,
     DocumentoListaItemComponent,
     DocumentoFormPage,
     DocumentoListaPage,
+    ConfiguracoesPage
   ],
   imports: [
     BrowserModule,
@@ -46,17 +46,17 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage,
     RegistrarPage,
     DocumentoFormPage,
-    DocumentoListaPage
+    DocumentoListaPage,
+    ConfiguracoesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoginProvider,
     DocumentoProvider,
     ListaDocumentoProvider
@@ -64,8 +64,9 @@ export const firebaseConfig = {
 })
 export class AppModule {
 
-  constructor(){
+  constructor() {
     firebase.initializeApp(firebaseConfig);
+    var storage = firebase.storage();
   }
 
 }

@@ -3,17 +3,16 @@ import { EstadoDocumento } from "./estadoDocumento";
 
 export class Documento {
 
-    id:string;
-    titulo:string;
-    link:string;
-    usuario:Usuario;
-    data:Date;
-    state:EstadoDocumento;
+    id: string;
+    titulo: string;
+    link: string;
+    usuario: Usuario;
+    data: Date;
 
-    constructor(titulo?:string, link?:string){
+    constructor(titulo?: string, link?: string) {
         this.titulo = titulo;
         this.link = link;
-        this.state = EstadoDocumento.NOVA;
+        this.usuario = new Usuario();
     }
 
 }
