@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>BancoHorasForm</ion-title>
+    <ion-title>Ponto Eletrônico</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -32,6 +32,14 @@
       </ion-item>
       <ion-item class="caixa-hora">
         <h2>Hora Saida: {{horaSaida | date:'hh:mm'}}</h2>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content class="caixa-hora">
+      <ion-item class="caixa-hora">
+        <h2>Horas Trabalhadas: {{somaHoras}}</h2>
       </ion-item>
     </ion-card-content>
   </ion-card>

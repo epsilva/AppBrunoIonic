@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>BancoHorasLista</ion-title>
+    <ion-title>Horas Trabalhadas</ion-title>
     <ion-buttons end>
       <button ion-button (click)="adicionarHoras()">
         <ion-icon name="create"></ion-icon>
@@ -11,6 +11,16 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+<ion-list [virtualScroll]="listaHoras">
+  <ion-item-sliding *virtualItem="let bancoHora">
+  <ion-item>
+    <ion-icon name="clock" item-start large></ion-icon>
+    <h2>{{bancoHora.dataEntrada | date:'dd/MM/yyyy'}} : {{bancoHora.dataSaida | date:'dd/MM/yyyy'}}</h2>
+    <p>{{bancoHora.horasTrabalhadas}}</p>
+  </ion-item>
+  </ion-item-sliding>
+</ion-list>
 
 </ion-content>

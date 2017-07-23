@@ -1,8 +1,9 @@
 export class BancoHoras{
 
 id: string;
-dataEntrada: number;
-dataSaida: number;
+dataEntrada;
+dataSaida;
+horasTrabalhadas;
 
 constructor(){
     

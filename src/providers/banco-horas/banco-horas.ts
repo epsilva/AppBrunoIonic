@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { LoginProvider } from '../login/login';
 import firebase from 'firebase';
 import { BancoHoras } from "../../models/bancoHoras";
+import * as moment from 'moment';
 
 @Injectable()
 export class BancoHorasProvider {
@@ -17,6 +18,10 @@ export class BancoHorasProvider {
     this.initialize();
   }
 
+  ionViewDidLoad(){
+    this.initialize();
+  }
+
   private initialize() {
     this.reference = firebase.database().ref('/bancoHoras/'+this.loginProvider.currentUser.uid);
     this.recuperarHoras();
@@ -24,7 +29,6 @@ export class BancoHorasProvider {
 
   save(data) {
     this.bancoHoras = new BancoHoras();
-    let keyUser = this.loginProvider.currentUser.uid;
     let refKey;
 
     this.recuperarHoras();
@@ -36,18 +40,18 @@ export class BancoHorasProvider {
           console.log(elemento.dataSaida);
           if(elemento.dataSaida == undefined){
             this.bancoHoras = elemento;
-            this.bancoHoras.dataSaida = new Date().getTime(); 
+            this.bancoHoras.dataSaida = moment().format('LLL');
             refKey = elemento.id;
           }else{
             refKey = this.reference.push().key;
-            this.bancoHoras.dataEntrada = new Date().getTime();
+            this.bancoHoras.dataEntrada = moment().format('LLL');
             this.bancoHoras.id = refKey;
           }
         });
       } else {
         // insert
         refKey = this.reference.push().key;
-        this.bancoHoras.dataEntrada = new Date().getTime();
+        this.bancoHoras.dataEntrada = moment().format('LLL');
         this.bancoHoras.id = refKey;
       }
 
@@ -65,6 +69,11 @@ export class BancoHorasProvider {
     });
 
     return this.listaHoras;
+  }
+
+  getReference(){
+    this.reference = firebase.database().ref('/bancoHoras/'+this.loginProvider.currentUser.uid);
+    return this.reference;
   }
 
 }

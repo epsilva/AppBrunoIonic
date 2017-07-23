@@ -33,8 +33,7 @@ export class ConfiguracoesPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfiguracoesPage');
-    
+    console.log('ionViewDidLoad ConfiguracoesPage');  
   }
 
   carregarImg(){
@@ -54,7 +53,7 @@ export class ConfiguracoesPage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.imageSrc = 'data:image/jpeg;base64,' + imageData;
-      alert(this.imageSrc);
+      // alert(this.imageSrc);
       this.upload();
     })
     .catch((erro) => {
@@ -69,7 +68,7 @@ export class ConfiguracoesPage {
 
     // Create a reference to 'images/todays-date.jpg'
     const imageRef = storageRef.child('images/'+filename+'.jpg');
-    alert('nome da imagem: '+ imageRef);
+    // alert('nome da imagem: '+ imageRef);
 
     imageRef.putString(this.imageSrc, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
       this.showSuccesfulUploadAlert(snapshot);

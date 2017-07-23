@@ -1,7 +1,9 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { BancoHorasProvider } from "../../providers/banco-horas/banco-horas";
 import { BancoHoras } from "../../models/bancoHoras";
+import * as moment from 'moment';
+import { LoginProvider } from "../../providers/login/login";
 
 /**
  * Generated class for the BancoHorasFormPage page.
@@ -23,8 +25,9 @@ export class BancoHorasFormPage {
   horaEntrada:string;
   horaSaida:string;
   listaHoras: Array<BancoHoras> = new Array();
+  somaHoras:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public bancoHorasProvider: BancoHorasProvider ,public ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public bancoHorasProvider: BancoHorasProvider ,public ngZone: NgZone, public loginProvider: LoginProvider) {
     this.bancoHoras = new BancoHoras();
     this.dataAtual = new Date().toISOString();
     this.recuperarHoras();
@@ -43,25 +46,18 @@ export class BancoHorasFormPage {
   }
 
   salvarBancoHoras() {
-    this.bancoHorasProvider.save(this.data);
-    // if(this.horaEntrada != undefined){
-    //   this.horaSaida = this.data;
-    // }else{
-    //   this.horaEntrada = this.data;
-    // }
-    
+    this.bancoHorasProvider.save(this.data);    
   }
 
 
   horaCurrent() {
     this.loop = setInterval(() => {
       this.data = new Date().toISOString();
-      // console.log(this.data);
     }, 1000);
   }
 
   recuperarHoras(){
-    this.bancoHorasProvider.reference.on('value', (snapshot) => {
+    this.bancoHorasProvider.getReference().on('value', (snapshot) => {
       this.ngZone.run(() => {
         let innerArray = new Array();
         snapshot.forEach(element => {
@@ -72,11 +68,21 @@ export class BancoHorasFormPage {
       });
       if (this.listaHoras.length > 0) {
         this.listaHoras.forEach(elemento => {
+          this.horaEntrada = "";
+          this.horaSaida = "";
+          this.somaHoras = "";
           if(elemento.dataEntrada != undefined){
             this.horaEntrada = elemento.dataEntrada.toString();
           }
           if(elemento.dataSaida != undefined){
             this.horaSaida = elemento.dataSaida.toString();
+            
+            var now = moment(elemento.dataEntrada);
+            var end = moment(elemento.dataSaida);
+           
+            var diffHoras = moment.utc(moment(end,"DD/MM/YYYY HH:mm").diff(moment(now,"DD/MM/YYYY HH:mm"))).format("HH:mm");
+            this.somaHoras = diffHoras;
+
           }
         });
     }
