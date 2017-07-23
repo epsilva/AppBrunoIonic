@@ -8,13 +8,28 @@
 
 
 <ion-content padding>
-<ion-list>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/img/web.jpg">
-    </ion-avatar>
+  <ion-list no-border>
+    <ion-list-header>
+      Foto
+    </ion-list-header>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <!-- <img src="assets/img/web.jpg"> -->
+        <img name="foto" [src]="usuario.foto">
+      </ion-avatar>
+        Adicionar Foto
+      <ion-icon name="camera" item-end (click)="tirarFoto()"></ion-icon>
+    </ion-item>
+
+    
+    <ion-list-header>
+      Sair
+    </ion-list-header>
+
+    <ion-item>
       Fazer Logout
-    <ion-icon name="exit" item-end (click)="sair()"></ion-icon>
-  </ion-item>
-</ion-list>
+      <ion-icon name="exit" item-end (click)="sair()"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -17,6 +17,11 @@ import { DocumentoListaPage } from '../pages/documento-lista/documento-lista';
 import { DocumentoFormPage } from '../pages/documento-form/documento-form';
 import { ListaDocumentoProvider } from '../providers/lista-documento/lista-documento';
 import { ConfiguracoesPage } from "../pages/configuracoes/configuracoes";
+import { BancoHorasListaPage } from "../pages/banco-horas-lista/banco-horas-lista";
+import { BancoHorasFormPage } from "../pages/banco-horas-form/banco-horas-form";
+import { BancoHorasListItemComponent } from '../components/banco-horas-list-item/banco-horas-list-item';
+import { BancoHorasProvider } from '../providers/banco-horas/banco-horas';
+import { Camera } from "@ionic-native/camera";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYBfEuw_onYke-woAchRQgW7jztE4FGzQ",
@@ -36,7 +41,10 @@ export const firebaseConfig = {
     DocumentoListaItemComponent,
     DocumentoFormPage,
     DocumentoListaPage,
-    ConfiguracoesPage
+    ConfiguracoesPage,
+    BancoHorasListaPage,
+    BancoHorasFormPage,
+    BancoHorasListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,9 @@ export const firebaseConfig = {
     RegistrarPage,
     DocumentoFormPage,
     DocumentoListaPage,
-    ConfiguracoesPage
+    ConfiguracoesPage,
+    BancoHorasListaPage,
+    BancoHorasFormPage
   ],
   providers: [
     StatusBar,
@@ -59,7 +69,9 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoginProvider,
     DocumentoProvider,
-    ListaDocumentoProvider
+    ListaDocumentoProvider,
+    BancoHorasProvider,
+    Camera
   ]
 })
 export class AppModule {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DocumentoListaPage } from "../documento-lista/documento-lista";
 import { ConfiguracoesPage } from "../configuracoes/configuracoes";
+import { BancoHorasListaPage } from "../banco-horas-lista/banco-horas-lista";
 
 @Component({
   templateUrl: 'tabs.html'
@@ -8,7 +9,8 @@ import { ConfiguracoesPage } from "../configuracoes/configuracoes";
 export class TabsPage {
 
   tab1Root = DocumentoListaPage;
-  tab2Root = ConfiguracoesPage;
+  tab2Root = BancoHorasListaPage;
+  tab3Root = ConfiguracoesPage;
 
   constructor() {
 

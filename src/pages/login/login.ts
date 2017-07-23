@@ -24,10 +24,10 @@ export class LoginPage {
       'senha': ['', Validators.required]
     });
 
-    
+
 
   }
-  
+
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
@@ -36,9 +36,10 @@ export class LoginPage {
 
   ionViewDidLoad() {
 
-  const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (!(!user)) {
-        this.navCtrl.setRoot(TabsPage);
+        //this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.push(TabsPage);
         // this.loginProvider.registrarUserInfo(user);
       }
     });

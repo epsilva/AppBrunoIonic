@@ -1,22 +1,22 @@
- <ion-header>
+<ion-header>
   <ion-navbar>
     <ion-title>
       Documento
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons end>
       <button ion-button (click)="adicionarDocumento()">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="create"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-</ion-header> 
+</ion-header>
 
 <ion-content>
   <ion-list [virtualScroll]="documentos">
     <ion-item-sliding *virtualItem="let documento">
       <ion-item (click)="abrirLink(documento)">
         <ion-avatar item-start>
-          <img src="assets/img/web.jpg">
+          <img name="foto" [src]="documento.usuario.foto">
         </ion-avatar>
         <documento-lista-item [documento]="documento"></documento-lista-item>
       </ion-item>

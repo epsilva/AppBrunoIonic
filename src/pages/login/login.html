@@ -1,7 +1,7 @@
 <ion-content class="imagem-back-login" padding>
 
   <div class="pad-img-logo">
-    <img src="assets/img/logoLatam.png" />
+    <img src="assets/img/logoLATAM.png" />
   </div>
 
   <form [formGroup]="loginForm">
@@ -18,7 +18,8 @@
     </ion-list>
 
     <button ion-button round type="input" (click)="logarComEmail()" [disabled]="loginForm.invalid" class="botao-grande">Entrar</button>
-    <button ion-button round type="input" (click)="logarComGoogle()" class="botao-grande">Logar Com Google</button>
-     <button ion-button round outline type="input " (click)="registrar() " class="botao-grande color-bota-registre ">Registre-se</button> 
+    <!-- <button ion-button round type="input" (click)="logarFacebook()" class="botao-grande">Logar Com Facebook</button>
+    <button ion-button round type="input" (click)="logarComGoogle()" class="botao-grande">Logar Com Google</button> -->
+    <button ion-button round outline type="input " (click)="registrar() " class="botao-grande color-bota-registre ">Registre-se</button>
   </form>
 </ion-content>

@@ -3,6 +3,10 @@ import { NavController, ToastController } from 'ionic-angular';
 import { Documento } from "../../models/documento";
 import { DocumentoProvider } from '../../providers/documento/documento';
 import { DocumentoFormPage } from '../documento-form/documento-form';
+import { Usuario } from "../../models/usuario";
+import { LoginProvider } from "../../providers/login/login";
+import firebase from 'firebase';
+
 
 @Component({
   selector: 'page-documento-lista',
@@ -13,7 +17,7 @@ export class DocumentoListaPage {
   documentos: Array<Documento>;
 
   constructor(public documentoProvider: DocumentoProvider,
-    public ngZone: NgZone, public toastCtrl: ToastController, public navCtrl: NavController) {
+    public ngZone: NgZone, public toastCtrl: ToastController, public navCtrl: NavController, public loginProvider:LoginProvider) {
     this.documentos = new Array<Documento>();
   }
 
