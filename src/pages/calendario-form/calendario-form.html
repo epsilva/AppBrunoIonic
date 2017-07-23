@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Evento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-input name="titulo" [(ngModel)]="calendario.titulo" placeholder="Titulo"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Data Inico Evento</ion-label>
+      <ion-datetime name="dataInicio" [(ngModel)]="calendario.dataInicio" displayFormat="MMM DD YYYY"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Hora Inicio</ion-label>
+      <ion-datetime name="horaInicio" [(ngModel)]="calendario.horaInicio" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+    </ion-item>
+
+     <ion-item>
+      <ion-label>Data Fim Evento</ion-label>
+      <ion-datetime name="dataFim" [(ngModel)]="calendario.dataFim" displayFormat="MMM DD YYYY"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Hora Fim</ion-label>
+      <ion-datetime name="horaFim" [(ngModel)]="calendario.horaFim" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>
+      Usuarios Participantes
+  </ion-list-header>
+  <ion-list [virtualScroll]="usuarios">
+    
+    <ion-item-sliding *virtualItem="let usuario">
+      <ion-item>
+        <ion-label>{{usuario.nome}}</ion-label>
+        <ion-checkbox color="royal" (click)="selecionado(usuario)"></ion-checkbox>
+      </ion-item>
+    </ion-item-sliding>
+
+
+  </ion-list>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button full (click)="salvarEvento()">
+        Salvar Evento
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

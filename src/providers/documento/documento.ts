@@ -23,7 +23,6 @@ export class DocumentoProvider {
 
   private initialize() {
     this.reference = firebase.database().ref('/documentos/');
-
   }
 
   save(documento: Documento) {

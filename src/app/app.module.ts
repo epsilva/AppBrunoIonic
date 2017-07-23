@@ -22,6 +22,10 @@ import { BancoHorasFormPage } from "../pages/banco-horas-form/banco-horas-form";
 import { BancoHorasListItemComponent } from '../components/banco-horas-list-item/banco-horas-list-item';
 import { BancoHorasProvider } from '../providers/banco-horas/banco-horas';
 import { Camera } from "@ionic-native/camera";
+import { NgCalendarModule } from 'ionic2-calendar';
+import { CalendarioPage } from "../pages/calendario/calendario";
+import { CalendarioFormPage } from "../pages/calendario-form/calendario-form";
+import { CalendarioProvider } from '../providers/calendario/calendario';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAYBfEuw_onYke-woAchRQgW7jztE4FGzQ",
@@ -44,11 +48,14 @@ export const firebaseConfig = {
     ConfiguracoesPage,
     BancoHorasListaPage,
     BancoHorasFormPage,
-    BancoHorasListItemComponent
+    BancoHorasListItemComponent,
+    CalendarioPage,
+    CalendarioFormPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    NgCalendarModule,
     HttpModule,
   ],
   bootstrap: [IonicApp],
@@ -61,7 +68,9 @@ export const firebaseConfig = {
     DocumentoListaPage,
     ConfiguracoesPage,
     BancoHorasListaPage,
-    BancoHorasFormPage
+    BancoHorasFormPage,
+    CalendarioPage,
+    CalendarioFormPage
   ],
   providers: [
     StatusBar,
@@ -71,7 +80,8 @@ export const firebaseConfig = {
     DocumentoProvider,
     ListaDocumentoProvider,
     BancoHorasProvider,
-    Camera
+    Camera,
+    CalendarioProvider
   ]
 })
 export class AppModule {
